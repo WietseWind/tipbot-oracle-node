@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "node-fetch": "2",
+    "xrpl-accountlib": "^9.2.0",
+    "xrpl-client": "^2.4.0"
+  }
+}
