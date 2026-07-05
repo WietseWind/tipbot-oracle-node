@@ -17,12 +17,14 @@
  */
 
 const fs = require('fs');
+const os = require('os');
+const path = require('path');
 const crypto = require('crypto');
 const fetch = require('node-fetch');
 const { XrplClient } = require('xrpl-client');
 const lib = require('xrpl-accountlib');
 
-const cfgPath = '~/.tipbotcfg';
+const cfgPath = path.join(os.homedir(), '.tipbotcfg');
 
 const RULE = '@xrptipbot OR @xahtipbot';
 const HOOK_ACCOUNT = 'rtipboteEEZ6JkTNvcYgUZbiYyrV2W7DQ';
