@@ -8,7 +8,7 @@
  *
  * deps: npm i node-fetch@2 xrpl-client xrpl-accountlib
  *
- * ~/.xapi (JSON):
+ * ~/.tipbotcfg (JSON):
  * {
  *   "bearer_token": "...",            // X API v2 bearer
  *   "seed": "s...",                   // family seed of THIS oracle's member account
@@ -17,12 +17,14 @@
  */
 
 const fs = require('fs');
+const os = require('os');
+const path = require('path');
 const crypto = require('crypto');
 const fetch = require('node-fetch');
 const { XrplClient } = require('xrpl-client');
 const lib = require('xrpl-accountlib');
 
-const cfgPath = '/root/.xapi';
+const cfgPath = path.join(os.homedir(), '.tipbotcfg');
 
 const RULE = '@xrptipbot OR @xahtipbot';
 const HOOK_ACCOUNT = 'rtipboteEEZ6JkTNvcYgUZbiYyrV2W7DQ';
@@ -50,9 +52,9 @@ function loadConfig() {
     const data = JSON.parse(fs.readFileSync(cfgPath, 'utf-8'));
 
     if (!data.bearer_token || typeof data.bearer_token !== 'string')
-      throw new Error("please define 'bearer_token' in ~/.xapi (non-empty string)");
+      throw new Error("please define 'bearer_token' in ~/.tipbotcfg (non-empty string)");
     if (!data.seed || typeof data.seed !== 'string')
-      throw new Error("please define 'seed' in ~/.xapi (family seed of this oracle's member account)");
+      throw new Error("please define 'seed' in ~/.tipbotcfg (family seed of this oracle's member account)");
 
     log('INFO', 'Configuration loaded successfully');
     return {
